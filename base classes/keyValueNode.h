@@ -1,3 +1,6 @@
+#include<iostream>
+#ifndef KVPNODE_H_
+#define KVPNODE_H_
 template<typename key, typename elem>
 class kvp_node {
 	bool setinel;
@@ -59,56 +62,6 @@ public:
 	void pprint(kvp_node<key, elem> *kvp= NULL);
 
 };
-
-
-//stores Key value pairs in a linked list format
-template<typename key, typename elem>
-class dict : private kvp_node<key, elem> {
-	kvp_node<key, elem> *head;
-	kvp_node<key, elem> *tail;
-	kvp_node<key, elem> *curr;
-	int records;
-	void m_next();
-	void m_prev();
-public:
-	// constructors/destructor and assignment operators
-	dict();
-	~dict();
-	dict(const dict<key, elem> &d);
-	void operator=(const dict<key, elem> &d);
-	//insert a kvp_node into the list in the correct spot
-	void insert(kvp_node<key, elem> *kvp);
-	//prefered way of inserting, makes kvpair and then calls
-	//regular insert function with the kvpair
-	void insert(key k, elem e);
-	//finds first instance of a node with the matching key value
-	//and returns a pointer to the element
-	kvp_node<key, elem> *search(key k);
-	//removes first instance of node with the matching key value
-	//from the list and then returns a copy of the stored element
-	elem remove(key &k);
-	//deletes first instance of node with matching key value and
-	//returns void
-	void del(key &k);
-	//indexing operation, returns pointer to the stored element
-	//can be used for accessing keys or setting values to a key
-	//syntax ' dict[k_val] ' decays to a pointer to the element
-	//stored with that key. If the key is not in the dictionary 
-	//It will make a new kv_pair and return a pointer to the e-
-	//lement stored at that key location
-	//can be used to create a new node and set it to a value:
-	//    dict[key k_val] = elem e_val;
-	//which will create a new entry if k_does not exist
-	elem operator[](key k);
-	//returns number of pairs stored in the dict
-	int len();
-	//prints out dictionary
-	void print();
-
-	kvp_node<typename key, typename elem>::link_nodes;
-	kvp_node<typename key, typename elem>::pprint;
-};
-
 
 //constructors, destructors, assignment
 template<typename key, typename elem>
@@ -259,3 +212,5 @@ void kvp_node<key, elem>::pprint(kvp_node<key, elem> *kvp) {
 	std::cout << '<' << kvp->key_() << ','<< ' ' << kvp->elm_() << '>';
 
 }
+
+#endif
