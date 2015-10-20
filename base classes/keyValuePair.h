@@ -12,9 +12,9 @@ _---Key value pair template---_
 */
 template<typename key, typename data>
 class kvPair {
+public:
 	key k_val;
 	data d_val;
-public:
 	~kvPair();
 	kvPair();
 	kvPair(key k, data d);
@@ -26,17 +26,6 @@ public:
 	bool operator<=(kvPair<key, data> &kvp);
 	bool operator>(kvPair<key, data> &kvp);
 	bool operator<(kvPair<key, data> &kvp);
-
-	//returns key value
-	key key_();
-	//returns data value
-	data dat_();
-
-	//sets key value
-	void wkey(key k);
-	//sets data value
-	void wdat(data d);
-
 };
 
 template<typename key, typename data>
@@ -52,8 +41,8 @@ kvPair<key, data>::kvPair(key k, data d) {
 
 template<typename key, typename data>
 kvPair<key, data>::kvPair(const kvPair<key, data> &kvp) {
-	k_val = kvp.key_();
-	d_val = kvp.dat_();
+	k_val = kvp.k_val;
+	d_val = kvp.d_val;
 }
 
 template<typename key, typename data>
@@ -63,61 +52,42 @@ kvPair<key, data>::~kvPair() {
 
 template<typename key, typename data>
 void kvPair<key, data>::operator=(const kvPair<key, data> &kvp) {
-	k_val = kvp.key_();
-	d_val = kvp.dat_();
+	k_val = kvp.k_val;
+	d_val = kvp.d_val;
 }
 
 template<typename key, typename data>
 bool kvPair<key, data>::operator==(kvPair<key, data> &kvp) {
-	return (k_val == kvp.key_());
+	return (k_val == kvp.k_val);
 }
 
 template<typename key, typename data>
 bool kvPair<key, data>::operator>=(kvPair<key, data> &kvp) {
-	return(k_val >= kvp.key_());
+	return(k_val >= kvp.k_val);
 }
 
 template<typename key, typename data>
 bool kvPair<key, data>::operator<=(kvPair<key, data> &kvp) {
-	return(k_val <= kvp.key_());
+	return(k_val <= kvp.k_val);
 }
 
 template<typename key, typename data>
 bool kvPair<key, data>::operator>(kvPair<key, data> &kvp) {
-	return(k_val > kvp.key_());
+	return(k_val > kvp.k_val);
 }
 
 template<typename key, typename data>
 bool kvPair<key, data>::operator<(kvPair<key, data> &kvp) {
-	return(k_val < kvp.key_());
-}
-
-template<typename key, typename data>
-key kvPair<key, data>::key_() {
-	return k_val;
-}
-
-template<typename key, typename data>
-data kvPair<key, data>::dat_() {
-	return d_val;
-}
-
-template<typename key, typename data>
-void kvPair<key, data>::wkey(key k) {
-	k_val = k;
-}
-
-template<typename key, typename data>
-void kvPair<key, data>::wdat(data d) {
-	d_val = d;
+	return(k_val < kvp.k_val);
 }
 
 //stream operators
 template<typename key, typename data>
 std::ostream &operator<<(std::ostream &os, kvPair<key, data> &kvp) {
 	std::cout << '<';
-	os << kvp.key_() << ", " << kvp.dat_();
+	os << kvp.k_val << ", " << kvp.d_val;
 	std::cout << '>';
 	return os;
 }
 #endif
+
